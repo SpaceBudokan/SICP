@@ -1,4 +1,4 @@
-;;;;SICP Exercise 1.3
+;;;;SICP Exercise 1.12
 ;;;;
 ;;;;Copyright 2018, SpaceBudokan
 ;;;;This program is free software: you can redistribute it and/or modify
@@ -14,12 +14,12 @@
 ;;;;along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #lang sicp
 
-(define (square-and-sum x y)
-  (+
-   (* x x)
-   (* y y)))
-(define (ex1.3 a b c)
-  (cond
-   ((and (>= a c) (>= b c)) (square-and-sum a b))
-   ((and (>= a b) (>= c b)) (square-and-sum a c))
-   ((and (>= b a) (>= c a)) (square-and-sum b c))))
+(define (pascals-triangle row col)
+  (if (or
+       (<= row 2)
+       (= row col)
+       (= col 1))
+      1
+      (+
+       (pascals-triangle (- row 1) (- col 1))
+       (pascals-triangle (- row 1) col))))

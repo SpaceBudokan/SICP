@@ -1,4 +1,4 @@
-;;;;SICP Exercise 1.3
+;;;;SICP Exercise 1.11
 ;;;;
 ;;;;Copyright 2018, SpaceBudokan
 ;;;;This program is free software: you can redistribute it and/or modify
@@ -14,12 +14,26 @@
 ;;;;along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #lang sicp
 
-(define (square-and-sum x y)
-  (+
-   (* x x)
-   (* y y)))
-(define (ex1.3 a b c)
-  (cond
-   ((and (>= a c) (>= b c)) (square-and-sum a b))
-   ((and (>= a b) (>= c b)) (square-and-sum a c))
-   ((and (>= b a) (>= c a)) (square-and-sum b c))))
+(define (f-recur n)
+  (if (< n 3)
+      n
+      (+
+       (f-recur(- n 1))
+       (* 2 (f-recur (- n 2)))
+       (* 3 (f-recur (- n 3))))))
+
+
+;;; this iterative version was a pain. I had to look it up. I had to read about five explanations before I figured out how it worked.
+(define (f-iter n)
+  (if (< n 3)
+      n
+      (f-tail 2 1 0 n)))
+
+(define (f-tail a b c cnt)
+  (if (< cnt 3)
+      a
+      (f-tail (+ a (* 2 b) (* 3 c))
+	      a
+	      b
+	      (- cnt 1))))
+      
